@@ -29,7 +29,6 @@ namespace FanPictureBox
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pictBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddPicture = new System.Windows.Forms.Button();
             this.btnDelPicture = new System.Windows.Forms.Button();
@@ -39,7 +38,6 @@ namespace FanPictureBox
             // pictBox1
             // 
             this.pictBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictBox1.Image")));
             this.pictBox1.Location = new System.Drawing.Point(0, 0);
             this.pictBox1.MaximumSize = new System.Drawing.Size(800, 364);
             this.pictBox1.MinimumSize = new System.Drawing.Size(800, 364);

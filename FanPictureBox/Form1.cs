@@ -14,6 +14,7 @@ namespace FanPictureBox
     public partial class Form1 : Form
     {
 
+        private string _currentPath;
 
         public bool IsMaximize
         {
@@ -56,35 +57,50 @@ namespace FanPictureBox
                 WindowState = FormWindowState.Maximized;
             }
 
-
-            if (PathPicture !="")
+            try
             {
-                PathPicture = Settings.Default.PathPicture;
-
+                if (!string.IsNullOrWhiteSpace(PathPicture))
+                {
+                    pictBox1.Image=Image.FromFile(PathPicture);
+                    _currentPath = PathPicture;
+                }
             }
-
-
-
-
-
-
-        }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Processing failed: {ex.Message}");
+            }
+          }
 
 
         private void btnDelPicture_Click(object sender, EventArgs e)
         {
-          pictBox1.Image = null;
+            pictBox1.Image = null;
+            _currentPath = null;
+            //PathPicture = null;
+            //Settings.Default.Save();
+
         }
 
         private void btnAddPicture_Click(object sender, EventArgs e)
         {
+            //OpenFileDialog pict = new OpenFileDialog();
+            //    if(pict.ShowDialog()==DialogResult.OK)
+            //{
+            //    Bitmap bit = new Bitmap(pict.FileName);
+            //    pictBox1.Image = bit;
+            //    pictBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //}
+            //inaczej
             OpenFileDialog pict = new OpenFileDialog();
-                if(pict.ShowDialog()==DialogResult.OK)
+            if (pict.ShowDialog() == DialogResult.OK)
             {
-                Bitmap bit = new Bitmap(pict.FileName);
-                pictBox1.Image = bit;
+                pictBox1.Image = Image.FromFile(pict.FileName);
                 pictBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                _currentPath = pict.FileName;
             }
+
+
+
 
         }
 
@@ -100,20 +116,17 @@ namespace FanPictureBox
             else
                 IsMaximize = false;
 
-            Settings.Default.Save();
 
-            if (pictBox1.Image !=null)
+            if (!String.IsNullOrWhiteSpace(_currentPath))
             {
-                PathPicture = pictBox1.Image.ToString();
+                PathPicture = _currentPath;
             }
             else
             {
-
-                Bitmap bit = null;
-                pictBox1.Image = bit;// PathPicture;
+                PathPicture = null;
             }
 
-
+            Settings.Default.Save();
 
         }
     }
