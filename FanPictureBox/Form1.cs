@@ -27,7 +27,6 @@ namespace FanPictureBox
                 Settings.Default.IsMaximize = value;
 
             }
-
         }
     
         public string PathPicture
@@ -42,12 +41,6 @@ namespace FanPictureBox
             }
 
         }
-
-
-
-
-
-
 
         public Form1()//konstruktor
         {
@@ -71,7 +64,6 @@ namespace FanPictureBox
             }
           }
 
-
         private void btnDelPicture_Click(object sender, EventArgs e)
         {
             pictBox1.Image = null;
@@ -91,22 +83,15 @@ namespace FanPictureBox
             //    pictBox1.SizeMode = PictureBoxSizeMode.Zoom;
             //}
             //inaczej
+
             OpenFileDialog pict = new OpenFileDialog();
+
             if (pict.ShowDialog() == DialogResult.OK)
             {
                 pictBox1.Image = Image.FromFile(pict.FileName);
                 pictBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 _currentPath = pict.FileName;
             }
-
-
-
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
